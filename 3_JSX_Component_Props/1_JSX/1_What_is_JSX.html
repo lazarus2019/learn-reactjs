@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+</head>
+
+<body>
+    <!-- 
+        JSX -> Javascript XML (với đặc trưng cú pháp thẻ mở-thẻ đóng)
+
+        1. Luôn dùng React.createElement()? Vấn đề?
+        => Khi render ra thì đối số nhận vào bắt buộc là 1 React element
+        => Code dài dòng, lặp lại nhiều để thể hiện element React => JSX xuất hiện
+
+        2. JSX? Live demo: https://babeljs.io/repl
+
+        3. JSX không phải là HTML, Cần có Javascript, Babel để dùng JSX
+        => Vì phải bắt buộc phải là React element nên JSX cần Babel để convert sang
+        (Babel: Giúp chuyển đổi cú pháp ES6 => ES5)
+        #Thêm thư viện Babel: <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>; 
+        #Thêm type="text/babel" vào thẻ script => dùng để hỗ trợ babel (mặc định thì chỉ hỗ trợ chạy code Javascript)
+
+        4. JSX và React-DOM?
+
+        <ul>
+            <li>Javascript</li>
+            <li>ReactJS</li>
+        </ul>
+     -->
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        alert('Hello')// Dòng này không được thực thi vì phần khai báo type chỉ hỗ trợ babel (mặc định là hỗ trợ Javascript)  
+
+        const ul = React.createElement(
+            'ul',
+            null,
+            React.createElement('li', null, 'Javascript'),
+            React.createElement('li', null, 'Javascript')
+        )
+
+        ReactDOM.render(ul, document.getElementById('root'))
+
+        // Sử dụng JSX
+        /*
+            Lồng code JS vào trong JXS: sử dụng dấu {} (trường hợp object thì dùng 2 cặp {{...}})
+            Tên Props của React Element phải được thiết lập tương tự như khi createElement (VD: className="post-list")
+        */
+        const reactCourse = 'ReactJS F8'
+
+        const ulJSX = <ul className="post-list">
+            <li style={{ color: 'red', fontSize: '30px' }}>Javascript</li>
+            <li>{reactCourse}</li>
+        </ul>
+
+        ReactDOM.render(ulJSX, document.getElementById('root'))
+
+        //// Bài tập
+        const courses = [
+            {
+                name: 'HTML, CSS'
+            },
+            {
+                name: 'ReactJS'
+            },
+            {
+                name: 'Javascript'
+            },
+            {
+                name: 'NodeJS'
+            }
+        ]
+
+        const ulBaiTap = (<ul>
+            {courses.map(course => <li>{course.name}</li>)}
+        </ul>)
+        //=> Dùng ngoặc nhọn để bao nhiều dòng code và cũng để tránh trường hợp thêm dấu ; tự động
+
+        ReactDOM.render(ulBaiTap, document.getElementById('root'))
+    </script>
+</body>
+
+</html>

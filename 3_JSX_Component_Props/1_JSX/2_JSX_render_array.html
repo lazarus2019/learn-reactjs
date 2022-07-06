@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSX Render array</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+
+    <!-- 
+    Chữa bài tập: Render list khóa học
+
+    * Câu hỏi thường gặp:
+        - Tại sao khi code thuần dùng map phải join()...
+
+        - Gặp lỗi khi render từ mảng (prop "key")
+        => Với mỗi children trong array (ám chỉ đến Prop children trong react element) thì cần có 1 prop key với giá trị không bị trùng nhau
+
+        - Không render được 2 elements cùng lúc
+        => Phải luôn có 1 element bao trọn children (phải dùng 1 thẻ khác bao bên ngoài)
+        => Để giải quyết vẫn đề cần thẻ bao bên ngoài, React đã tạo ra 1 thẻ đặc biệt (tính chất bao trọn nhưng không bị render ra UI)
+        Thẻ dùng để bao trọn: React.Fragment
+     -->
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const courses = [
+            {
+                name: 'HTML, CSS'
+            },
+            {
+                name: 'ReactJS'
+            },
+            {
+                name: 'Javascript'
+            },
+            {
+                name: 'NodeJS'
+            }
+        ]
+
+        // Không như Javascript cần sử dụng innerHTML 
+        // JSX sẽ tự tạo ra các reactElement
+        // Props children của react element có thể nhận về là mảng nên có thể sử dụng map của Array để lặp
+        const jsx = (
+            <ul>
+                {courses.map((course, index) =>
+                    <li>{course.name}</li>
+                    // React.createElement('li', null, course.name)
+
+                    // Thêm prop key là index để không bị trùng
+                    // <li key={index}>{course.name}</li>
+                )}
+            </ul>
+        )
+        ReactDOM.render(jsx, document.getElementById('root'))
+
+        const jsxFragment = (
+            <React.Fragment>
+                <h1>Heading 1</h1>
+                <h2>Heading 2</h2>
+            </React.Fragment>
+            // Vẫn được convert sang react element như bình thường
+            // React.createElement(React.Fragment, null,...)
+
+            // Thay vì phải dùng 1 thẻ html khác
+            /*
+            <div>
+                <h1>Heading 1</h1>
+                <h2>Heading 2</h2>
+            </div>
+            */
+        )
+        ReactDOM.render(jsxFragment, document.getElementById('root'))
+    </script>
+</body>
+
+</html>
