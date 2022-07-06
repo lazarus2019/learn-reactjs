@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React DOM 17</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+</head>
+
+<body>
+
+    <!-- 
+        1. Tại sao phải sử dụng React-DOM?
+        => Để element tạo bởi React render ra DOM
+        Ngoài ra còn có React-Native -> render các ứng dụng iOS, Android
+        2. Tại sao phải tách React-DOM ra?
+        => Tinh gọn (tách phần render UI ra 1 thư viện riêng), vì thư viện react có thể dùng cho các ReactJS và React-native
+        3. Render UI
+     -->
+
+    <div id="root"></div>
+
+    <script>
+        // React
+        const postItem = React.createElement(
+            'div',
+            {
+                className: 'post-item'
+            },
+            React.createElement(
+                'h2',
+                { title: 'Học ReactJS tại F8' },
+                'Học ReactJS'
+            ),
+            React.createElement(
+                'p',
+                null,
+                'Học ReactJS từ cơ bản tới nâng cao'
+            )
+        )
+
+        // Get root element
+        const root = document.querySelector('#root')
+
+        // React-DOM -> render UI
+        // ReactDOM.render(element, container, callback)
+
+        ReactDOM.render(postItem, root)
+
+        const h1React = React.createElement(
+            'h1',
+            {
+                title: 'Hello',
+                className: 'heading'
+            },
+            'Hello guys!'
+        )
+        ReactDOM.render(h1React, root)
+
+        const ulReact = React.createElement(
+            'ul',
+            {},
+            React.createElement(
+                'li',
+                {},
+                'Javascript'
+            ),
+            React.createElement(
+                'li',
+                {},
+                'ReactJS'
+            )
+        )
+        ReactDOM.render(ulReact, root)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React DOM 18</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <!-- 
+        React DOM 18
+        1. Từ phiên bản 18, hàm render của 17 vẫn có thể dùng nhưng sẽ hiện warning trong Tab console
+        2. Phiên bản 18 chia render ra làm 2 nhánh (client và server), dòng code render phía dưới có thể bị warning nên sử dụng library react-dom của client
+        3. Warning nếu sử dụng 2 cách render cùng 1 lần
+    -->
+
+    <script>
+        const postItem = React.createElement(
+            'div',
+            {
+                className: 'post-item'
+            },
+            React.createElement(
+                'h2',
+                { title: 'Học ReactJS tại F8' },
+                'Học ReactJS'
+            ),
+            React.createElement(
+                'p',
+                null,
+                'Học ReactJS từ cơ bản tới nâng cao'
+            )
+        )
+
+        //React-DOM@17
+        const container = document.querySelector('#root')
+        ReactDOM.render(postItem, container)
+
+        //React-DOM@18 - 2022
+        const root = ReactDOM.createRoot(container)
+        root.render(postItem)
+
+    </script>
+</body>
+
+</html>
