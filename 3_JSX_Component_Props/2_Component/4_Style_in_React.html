@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style in React</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <!-- Bài tập 1 -->
+    <style>
+        .box {
+            border: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .box--big {
+            width: 270px;
+            height: 270px;
+        }
+
+        .box--small {
+            width: 90px;
+            height: 90px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+        Style trong React components:
+            1. Inline styles với style prop (property name là camelCase)
+            2. Sử dụng className prop và CSS selector
+
+        Bài tập và ví dụ khác
+            Bài tập 1. Thêm className và style prop cho từng box
+
+            Bài tập 2. Tạo custom component <Box /> và nhận các props: className, style 
+            Mong muốn: 
+                <Box className="main-box" style={{backgroundColor: 'lightblue'}}>
+                small lightblue box
+                </Box>
+
+            Bài tập 3. Tạo custom component và nhận vào prop size
+            #Mong muốn: 
+                <Box size="small" style={{backgroundColor: 'lightblue'}}>
+                small lightblue box
+                </Box>
+     -->
+
+    <div id="container"></div>
+
+    <script type="text/babel">
+        //// 1. Inline styles với style prop
+        const inlineStyleHTML = <div style="margin-top: 20px; background-color: blue;"></div>
+
+        const inlineStyleJSX = <div style={{ marginTop: 20, backgroundColor: 'blue' }} />
+        //=> {{value}} là cú pháp kết hợp giữa JSX expression và object expression
+
+        const myStyles = { marginTop: 20, backgroundColor: 'blue' }
+        const inlineStyleJSX2 = <div style={myStyles} />
+
+        //// 2. Sử dụng className prop và CSS selector
+        const helloClass = <div className='text'>Hello</div>
+        // Sử dụng className để set class cho element => css selector để style cho component này
+
+
+    </script>
+
+    <!-- Bài tập 1 Start -->
+    <script type="text/babel">
+        const smallBox = (
+            <div
+                className="box box--small"
+                style={{ fontStyle: 'italic', backgroundColor: 'lightblue' }}
+            >
+                small lightblue box
+            </div>
+        )
+
+        const bigBox = (
+            <div
+                className="box box--big"
+                style={{ fontStyle: 'italic', backgroundColor: 'orange' }}
+            >
+                big orange box
+            </div>
+        )
+        function App() {
+            return (
+                <div>
+                    {smallBox}
+                    {bigBox}
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App />, document.getElementById('container'))
+    </script>
+    <!-- Bài tập 1 End -->
+
+    <!-- Bài tập 2 Start -->
+    <script type="text/babel">
+        function Box({ style, className = '', ...otherProps }) {
+            return (
+                <div
+                    className={`box ${className}`}
+                    // Kế thừa tất cả style từ component và thêm thuộc tính chữ in nghiêng
+                    style={{ fontStyle: 'italic', ...style }}
+                    {...otherProps}
+                // otherProps: Những props khác style và className nếu có cũng tự động được thêm vào thẻ div này
+                />
+            )
+        }
+
+        function App() {
+            return (
+                <div>
+                    <Box className="main-box" style={{ backgroundColor: 'lightblue' }}>
+                        small lightblue box
+                    </Box>
+                </div>
+            )
+        }
+    </script>
+    <!-- Bài tập 2 End -->
+
+    <!-- Bài tập 3 Start -->
+    <script type="text/babel">
+        function Box({ style, size, className = '', ...otherProps }) {
+            const sizeClassName = size ? `box--${size}` : ''
+            return (
+                <div
+                    className={`box ${className} ${sizeClassName}`}
+                    style={{ fontStyle: 'italic', ...style }}
+                    {...otherProps}
+                />
+            )
+        }
+    </script>
+    <!-- Bài tập 3 End -->
+</body>
+
+</html>
