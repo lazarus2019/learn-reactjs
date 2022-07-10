@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React DOM events 2</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+
+    <!-- 
+        Làm việc với JSX
+
+        - Xử lý DOM events 2 & Sửa bài tập (Tiếp tục phần 2 ở file tiếp theo)
+
+        // UI component: Chỉ nhận dữ liệu và hiển thị, không xử lý logic trong component
+        //=> Đơn giản hóa component để chỉ hiện thị ra giao diện người dùng
+
+        Ví dụ dưới đây thì CourseItem và MainApp là những UI components
+
+        // Nhiệm vụ cơ bản của element và component đối với DOM events
+        React Element: 
+            - Định nghĩa event
+            - Tiếp nhận props handle func event từ component
+            - Truyền dữ liệu vào handle event func
+
+        React Component: 
+            - Tạo props handle func event
+            - Tạo arrow handle func event ở bên ngoài (vị trí: trong component nhưng ngoài khu vực JSX)
+
+        //=> Giúp UI component không ảnh hưởng tới perform của UI khi render
+     -->
+
+    <div id="root"></div>
+
+    <!-- START: PHẦN II -->
+    <script type="text/babel">
+        const courses = [
+            {
+                id: 1,
+                title: 'Kiến Thức Nhập Môn IT',
+                thumbnail: 'https://files.fullstack.edu.vn/f8-prod/courses/7.png',
+                students_count: 75002
+            },
+            {
+                id: 2,
+                title: 'Lập Trình JavaScript Cơ Bản',
+                thumbnail: 'https://files.fullstack.edu.vn/f8-prod/courses/2.png',
+                students_count: 12023
+            }
+        ]
+
+        function CourseItem({ course, onClick }) { // Nhận về callback để thực thi sự kiện
+            return (
+                <div>
+                    {/*Truyền dữ liệu vào func handle qua element*/}
+                    <h2 onClick={() => onClick(course)}>{course.title}</h2>
+                    <img src={course.thumbnail} />
+                    <p>{course.students_count}</p>
+                </div>
+            )
+        }
+
+        // Container
+        function MainApp() {
+
+            // Khởi tạo arrow function để xử lý event
+            const handleClick = (course) => {
+                console.log(course.title)
+            }
+
+            return (
+                <div id="wrapper">
+                    {courses.map(course => (
+                        <CourseItem
+                            key={course.id}
+                            course={course}
+                            // Tạo 1 prop dùng cho riêng cho event của children                            
+                            onClick={handleClick}
+
+                        // Truyền dữ liệu vào func handle click
+                        // onClick={() => handleClick(course)} //=> Cũng được, nhưng sẽ ảnh hưởng tới perform của UI khi render
+                        /*
+                            Giải thích: 
+                            - Đối với component: khi truyền vào 1 func mới bao function handle chứ không phải 1 function bên ngoài => ảnh hưởng tới UI perform
+
+                            - Đối với element: Không ảnh hưởng khi truyền vào 1 func mới vì element không bị ảnh hưởng bởi UI perform như component
+                        */
+                        />
+                    ))}
+                </div>
+            )
+        }
+
+        ReactDOM.render(<MainApp />, document.getElementById('root'))
+    </script>
+
+    <!-- END: PHẦN II -->
+</body>
+
+</html>

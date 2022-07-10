@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React DOM events</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+
+    <!-- 
+        Làm việc với JSX
+
+        - Xử lý DOM events 
+
+        - Xử lý DOM events 2 & Sửa bài tập (4_DOM_events_2.htmlo)
+     -->
+
+    <div id="root"></div>
+    <div id="app"></div>
+
+    <!-- START: PHẦN I -->
+    <!-- 1 vài lưu ý khi truyền props -->
+    <script type="text/babel">
+        const courses = [
+            {
+                id: 1,
+                title: 'Kiến Thức Nhập Môn IT',
+                thumbnail: 'https://files.fullstack.edu.vn/f8-prod/courses/7.png',
+                students_count: 75002
+            },
+            {
+                id: 2,
+                title: 'Lập Trình JavaScript Cơ Bản',
+                thumbnail: 'https://files.fullstack.edu.vn/f8-prod/courses/2.png',
+                students_count: 12023
+            },
+            {
+                id: 3,
+                title: 'Responsive Với Grid System',
+                thumbnail: 'https://files.fullstack.edu.vn/f8-prod/courses/3.png',
+                students_count: 4002
+            },
+            {
+                id: 4,
+                title: 'HTML, CSS từ Zero đến Hero',
+                thumbnail: 'https://files.fullstack.edu.vn/f8-prod/courses/1.png',
+                students_count: 9131
+            },
+            {
+                id: 5,
+                title: 'Làm việc với Terminal & Ubuntu',
+                thumbnail: 'https://files.fullstack.edu.vn/f8-prod/courses/8.png',
+                students_count: 64513
+            },
+            {
+                id: 6,
+                title: 'Lập Trình JavaScript Nâng Cao',
+                thumbnail: 'https://files.fullstack.edu.vn/f8-prod/courses/6.png',
+                students_count: 112031
+            },
+
+        ]
+
+        // Trong dự án vừa và nhỏ, sử dụng tên props theo tên của API => đơn giản
+        // Trong dự án lớn, dữ liệu có thể phát sinh phức tạp trong tương lai, props API => Transformer => props camelCase
+        const CourseItem = ({ course }) => (
+            <div>
+                {/*// Bài tập: Thêm sự kiện click khi bấm vào title của khóa học*/}
+                <h2
+                    onClick={() =>
+                        alert(course.title)
+                    }>{course.title}</h2>
+                <img src={course.thumbnail} />
+                <p>{course.students_count}</p>
+            </div>
+        )
+
+        function MainApp() {
+            return (
+                <div id="wrapper">
+                    {courses.map(course => (
+                        // Truyền bình thường
+                        // <CourseItem
+                        //     key = {course.id}
+                        //     image = {course.thumbnail}
+                        //     studentsCount = {course.students_count}
+                        //     title = {course.title}
+                        // />
+
+                        // Truyền object
+                        <CourseItem
+                            key={course.id}
+                            course={course}
+                        />
+                    ))}
+                </div>
+            )
+        }
+
+        ReactDOM.render(<MainApp />, document.getElementById('root'))
+    </script>
+
+    <!-- DOM events -->
+    <script type="text/babel">
+        function App() {
+            return (
+                <div id="wrapper">
+                    <button
+                        // chuyển onclick thành camelCase => onClick
+                        onClick={(event) => {
+                            console.log(Math.random())
+                            console.log(event)
+                        }
+                        }
+                    >Click me!</button>
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App />, document.getElementById('app'))
+    </script>
+    <!-- END: PHẦN I -->
+</body>
+
+</html>
