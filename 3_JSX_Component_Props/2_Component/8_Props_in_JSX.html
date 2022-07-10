@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Props in JSX</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+
+    <!-- 
+        Làm việc với JSX
+
+        // Phần II. 
+        - Props trong JSX
+            - <YourComponent
+                propName1="String literals" -#Khởi tạo props cách 1
+                propName1={expression}      -#Khởi tạo props cách 2
+                
+                expression KHÔNG bao gồm: if else, switch case
+                expression chỉ nhận toán tử trong JS: + - * / %, 3 ngôi, gán, [], {}, func,...
+
+            />
+            - Props default to "true"
+            - Spread/Rest props
+            - Children prop
+                - <YourComponent>String literals</YourComponent>
+                - <YourComponent>{expression}</YourComponent>
+            - Render props
+     -->
+
+    <div id="app"></div>
+
+    <script type="text/babel">
+
+        function Button({ title }) {
+            return <button>{title}</button>
+        }
+
+        // Sử dụng toán tử rest và spread giảm thiểu việc gán từng props cho input
+        function Input({ label, ...inputProps }) {
+            return (
+                <div>
+                    <label>{label}</label>
+                    <input {...inputProps} />
+                </div>
+            )
+        }
+
+        // Children prop
+        function Ahref({ href, children }) {
+            return <a href={href}>{children}</a>
+        }
+
+        // Render prop
+        function List({ data, children }) {
+            return (
+                <ul>
+                    {data.map((item, index) => children(item, index))}
+                    {/*
+                        Có thể dùng toán tử rest và spread cho gọn hơn
+                        {data.map((...props) => children(...props))}
+                    */}
+                    {/* Hoặc ngắn gọn hơn thì: {data.map(children)} */}
+                </ul>
+            )
+        }
+
+        function MainApp() {
+            // Ví dụ: String literal và expression
+            const title = 'Hello anh em!'
+            const isAllow = false
+
+            // Ví dụ: Render props
+            const cars = ['Honda', 'Lambo', 'Mazda']
+
+            return (
+                <div id="wrapper">
+                    {/* String literal và expression */}
+                    <Button
+                        title={title} // expression
+                        alt="Hello" // String literal
+
+                        // Props default to "true"
+                        primary // prop luôn luôn là TRUE (khi không được gán bất kỳ giá trị nào)
+                        allow={isAllow} // với giá trị FALSE thì bắt buộc phải gán
+                    />
+
+                    {/* Spread/Rest props */}
+                    <Input
+                        label="Full name"
+                        type="text"
+                        placeholder="Enter your name..."
+                        onFocus={() => console.log(Math.random())}
+                    />
+
+                    {/* Children prop */}
+                    <Ahref href="https://fullstack.edu.vn/">
+                        Go to F8 {/* Phần ở giữa Component mặc định sẽ là prop children */}
+                    </Ahref>
+
+                    <Ahref href="https://google.com/">
+                        {/* Tương tự có thể truyền string literal hoặc expression */}
+                        Go to Google
+                        {false || ' Now!'}
+                        {false && ' Now!'}
+                    </Ahref>
+
+                    {/* Render prop */}
+                    <List data={cars}>
+                        {(item, index) => <li key={index}>{item}</li>}
+                    </List>
+                </div>
+            )
+        }
+
+        ReactDOM.render(<MainApp />, document.getElementById('app'))
+    </script>
+</body>
+
+</html>
