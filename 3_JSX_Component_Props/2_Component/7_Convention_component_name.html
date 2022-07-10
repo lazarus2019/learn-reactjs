@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convention component name</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+
+    <!-- 
+        Làm việc với JSX
+
+        // Phần I.
+        - Component do chúng ta định nghĩa phải viết in hoa ký tự đầu => React báo lỗi
+            - Chọn component trong 1 object
+        - Booleans, Null & Undefined không được render
+        - Kết hợp toán tử logic để render theo điều kiện
+
+        // Phần II (6_Props_in_JSX.html)
+     -->
+
+    <div id="app"></div>
+
+    <script type="text/babel">
+        const Form = {
+            // Bất kể Function nào được sử dụng cũng có thể là Component (cho dù là method của object)
+            Input() {
+                return <input />
+            },
+            Checkbox() {
+                return <input type="checkbox" />
+            }
+        }
+
+        function Button({ title, href, onClick }) {
+            let Component = 'button'
+            const props = {}
+
+            if (href) {
+                Component = 'a'
+                props.href = href
+            }
+            if (onClick) {
+                props.onClick = onClick
+            }
+
+            return (
+                <Component {...props}>{title}</Component>
+            )
+        }
+
+        // MainApp viết hoa chữ cái đầu
+        function MainApp({ title, content }) {
+            // Tùy biến type của input
+            const type = 'Input'
+            // const type = 'Checkbox'
+
+            // Khởi tạo biến mới vì JSX không hỗ trợ
+            // Chọn component trong 1 object
+            const Component = Form[type]
+            const Component2 = Form.type
+
+            // Ví dụ: Booleans, Null & Undefined không được render
+            let firstAccess = false
+
+            return (
+                <div id="wrapper">
+                    {/*Gọi component bên trong object Form*/}
+                    <Form.Checkbox />
+
+                    {/*JSX không hỗ trợ gọi method object qua 2 cách: Form[type] hoặc Form.type */}
+                    {/*=> Phải sử dụng 1 biến khác được khởi tạo từ 2 cách trên*/}
+
+                    {/*<Component />*/}
+                    {/*<Component2 />*/}
+
+                    {/*Component đa năng: có method onClick => button, có href => thẻ a*/}
+                    <Button
+                        title="Click me!"
+                        onClick={() => console.log(Math.random())}
+                        href="https://fullstack.edu.vn/learning/reactjs?id=f106ce66-7cfa-4963-94ad-81e96945a576"
+                    // Nếu vừa có onClick và href thì hàm trong onClick vẫn được thực thi trước khi chuyển hướng theo href
+                    />
+
+                    {/*Booleans, Null & Undefined không được render*/}
+                    {true}
+                    {false}
+                    {null}
+                    {undefined}
+                    {firstAccess && <h1>Welcome to mySite</h1>}
+                    <h1 title={title || content}>{title || content}</h1>
+                </div>
+            )
+        }
+
+        ReactDOM.render(<MainApp content="New Content" />, document.getElementById('app'))
+    </script>
+</body>
+
+</html>
