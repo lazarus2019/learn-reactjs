@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React element props</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+
+    <!-- 
+        Props
+
+        - React elements (Là thẻ JSX)
+            - Sử dụng props giống như với attribute của thẻ HTML
+            - 2 props class, for => className, htmlFor
+            - Phải tuân theo quy ước có sẵn
+        - React components (function/class tạo ra component)
+            - SỬ dụng props giống như đối số cho Component
+            - Tự do đặt tên props
+                - Đặt theo camelCase
+                - *Có thể bao gồm dấu gạch ngang (-)
+        - Chú ý:
+            - Prop "key" là prop đặc biệt (dùng để xác định điểm khác nhau giữa các phần tử trong cùng 1 list)
+            - Props cơ bản là đối số của Component
+                => Props có thể là bất cứ kiểu dữ liệu gì
+            - Sử dụng destructuring
+
+     -->
+
+    <div id="root"></div>
+
+    <div id="courses"></div>
+
+    <!-- Sử dụng trong thực thế -->
+    <script type="text/babel">
+
+        // PostItem.js
+        function PostItem(props) {
+            console.log(props) // Props là object chứa các props tạo ra từ component
+
+            if (typeof props.callback === 'function') {
+                props.callback('Callback value')
+            }
+            return (
+                <div className="post-item">
+                    <img src="https://files.fullstack.edu.vn/f8-prod/courses/3.png" alt="Responsive Với Grid System" />
+                    <h2 className="post-title">{props.title || 'Responsive Với Grid System'}</h2>
+                    <p className="post-desc">Bạn có kiến thức ngôn ngữ...</p>
+                    <p className="post-published">1 ngày trước - 5 phút đọc</p>
+                </div>
+            )
+        }
+
+        // App.js
+        // Hàm khởi tạo phần tử để chứa toàn bộ nội dung website
+        function App() {
+            return (
+                <div id="wrapper">
+                    <label htmlFor="email">Email</label> {/*Sử dụng htmlFor thay cho for*/}
+                    <input id="email" />
+                    <PostItem />
+                    <PostItem />
+                    {/*Sử dụng đối số để truyền props*/}
+                    <PostItem
+                        id={1}
+                        thumbnail='https://files.fullstack.edu.vn/f8-prod/courses/2.png'
+                        title='Đây là title mới'
+                        // Cũng có thể truyền callback như bình thường
+                        callback={(value) => {
+                            console.log(value) // 'Callback value'
+                        }}
+                    />
+                </div>
+            )
+        }
+
+        // index.js
+        // import App.js to index.js
+        ReactDOM.render(<App />, document.getElementById('root'))
+
+    </script>
+
+    <!-- Bài tập -->
+    <script type="text/babel">
+        const coursesAPI = 'https://62c808398c90491c2cace1c0.mockapi.io/courses'
+
+        async function getCourses() {
+            const courses = await fetch(coursesAPI)
+                .then(response => {
+                    return response.json()
+                })
+
+            function PostItem2({
+                title,
+                thumbnail,
+                id,
+                description,
+                published,
+                price
+            }) {
+                return (
+                    <div className="post-item" data-id={id}>
+                        <img src={thumbnail} alt={title} width="200" height="150" />
+                        <h2 className="post-title">{title}</h2>
+                        <p className="post-desc">{description}</p>
+                        <p className="post-published">{new Date(published).toDateString()}</p>
+                        <p className="post-price">${price}</p>
+                    </div>
+                )
+            }
+
+            function PostList() {
+                return (
+                    <React.Fragment>
+                        {courses.map(course =>
+                            <PostItem2
+                                title={course.name}
+                                thumbnail={course.thumbnail}
+                                id={course.id}
+                                description={course.description}
+                                published={course.createdAt}
+                                price={course.price}
+                            />
+                        )}
+                    </React.Fragment>
+                )
+            }
+
+            ReactDOM.render(<PostList />, document.getElementById('courses'))
+        }
+
+        getCourses()
+    </script>
+</body>
+
+</html>

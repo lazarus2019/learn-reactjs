@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check PropTypes in runtime</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <!-- 
+        Sử dụng PropTypes để check runtime
+
+        - Tự định nghĩa propTypes function
+        - Check type cho từng props khi được nhận
+        - Custom lỗi và thông báo lỗi rõ ràng, tường minh hơn => tìm và sửa lỗi nhanh hơn
+
+        - Sử dụng package của React propTypes để check type
+        => import <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+     -->
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        //// Tự đinh nghĩa propTypes function
+        function FavoriteNumber({ favoriteNumber, title }) {
+            return <div>My favorite number is: {favoriteNumber}</div>
+        }
+
+        const PropTypes = {
+            number(props, propName, componentName) {
+                console.log(props) // {favoriteNumber: 10, title: 2}
+                console.log(propName) // favoriteNumber
+                console.log(componentName) // FavoriteNumber
+                if (typeof props[propName] !== 'number') {
+                    return new Error(`${propName} must be number`)
+                }
+            },
+            string(props, propName, componentName) {
+                if (typeof props[propName] !== 'string') {
+                    return new Error(`${propName} must be string`)
+                }
+            }
+        }
+
+        FavoriteNumber.propTypes = {
+            // Khai báo từng type cho prop
+            favoriteNumber: PropTypes.number,
+            title: PropTypes.string
+        }
+
+        function App() {
+            return (
+                <FavoriteNumber favoriteNumber={10} title={2} />
+            )
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'))
+
+        //// Sử dụng package của React propTypes
+        function Message({ subject, greeting }) {
+            return (
+                <div className="message">
+                    {greeting}, {subject}
+                </div>
+            )
+        }
+        Message.propTypes = {
+            subject: PropTypes.string.isRequired,
+            greeting: PropTypes.string.isRequired,
+        }
+
+        const element = (
+            <div className="container">
+                <Message subject="World" greeting="Hello" />
+                <Message subject="World" greeting="Goodbye" />
+            </div>
+        )
+
+        ReactDOM.render(element, document.getElementById('root'))
+    </script>
+</body>
+
+</html>

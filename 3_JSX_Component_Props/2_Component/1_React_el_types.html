@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React element types</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <!-- 
+        *Hook
+        Từ khi Hook ra đời thì function được hỗ trợ nhiều tính năng giống như class
+
+        1. React element types: string, function/class(ES6)
+        React.createElement(types=> chính là cái này, props, children)
+            - Wrapper
+                - Header -> Header component
+                - Content -> Content component
+                - Footer -> Footer component
+
+            => Cấu trúc code rõ ràng & tận dụng được tính tái sử dụng của component
+        2. Biểu diễn đơn giản với JSX
+     -->
+
+    <div id="app"></div>
+
+    <div id="courses"></div>
+
+    <script type="text/babel">
+
+        // Sử dụng function/class để tách các phần của website ra riêng
+        // Khai báo component vào JSX bằng cách sử dụng thẻ tag
+        // Tên function/class khi khởi tạo component thì bắt đầu bằng chữ Hoa
+        function Header() {
+            return (
+                <div className="header">Header</div>
+            )
+        }
+
+        class Content extends React.Component {
+            // React hỗ trợ class trở thành React component
+            render() {
+                return (
+                    <div className="content">Content</div>
+                )
+            }
+        }
+
+        const app = (
+            <div className="wrapper">
+                {/*<Header></Header>*/}
+                <Header /> {/*Ngắn gọn hơn*/}
+                <Content />
+                <div className="footer">Footer</div>
+            </div>
+        )
+
+        ReactDOM.render(app, document.getElementById('app'))
+        // Mở Inspect và vào tab elements xem cách function và class được React khởi tạo thành React component
+
+        //// Bài tập
+        function PostItem() {
+            return (
+                <div className="post-item">
+                    <img src="https://files.fullstack.edu.vn/f8-prod/courses/3.png" alt="Responsive Với Grid System" />
+                    <h2 className="post-title">Responsive Với Grid System</h2>
+                    <p className="post-desc">Bạn có kiến thức ngôn ngữ...</p>
+                    <p className="post-published">1 ngày trước - 5 phút đọc</p>
+                </div>
+            )
+        }
+
+        const posts = (
+            <div className="posts-list">
+                <PostItem />
+                <PostItem />
+                <PostItem />
+            </div>
+        )
+
+        console.log(posts)
+
+        ReactDOM.render(posts, document.getElementById('courses'))
+    </script>
+</body>
+
+</html>
