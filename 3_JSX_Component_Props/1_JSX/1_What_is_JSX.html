@@ -14,6 +14,7 @@
 <body>
     <!-- 
         JSX -> Javascript XML (với đặc trưng cú pháp thẻ mở-thẻ đóng)
+        Javascript Syntax Extension
 
         1. Luôn dùng React.createElement()? Vấn đề?
         => Khi render ra thì đối số nhận vào bắt buộc là 1 React element
@@ -63,6 +64,15 @@
         </ul>
 
         ReactDOM.render(ulJSX, document.getElementById('root'))
+
+
+        // Interpolate props object vào JSX
+        const children = 'Hello World'
+        const className = 'container' // sử dụng className thay cho class trong HTML
+        // Chi tiết:
+        // https://reactjs.org/docs/dom-elements.html#differences-in-attributes
+        const props = { children, className }
+        const element = <div {...props} />
 
         //// Bài tập
         const courses = [

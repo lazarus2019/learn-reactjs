@@ -25,7 +25,7 @@
         - Không render được 2 elements cùng lúc
         => Phải luôn có 1 element bao trọn children (phải dùng 1 thẻ khác bao bên ngoài)
         => Để giải quyết vẫn đề cần thẻ bao bên ngoài, React đã tạo ra 1 thẻ đặc biệt (tính chất bao trọn nhưng không bị render ra UI)
-        Thẻ dùng để bao trọn: React.Fragment
+        Thẻ dùng để bao trọn: React.Fragment hoặc để trống (<>...</>)
      -->
 
     <div id="root"></div>
@@ -69,6 +69,12 @@
             </React.Fragment>
             // Vẫn được convert sang react element như bình thường
             // React.createElement(React.Fragment, null,...)
+
+            // Ngoài ra có thể sử dụng ngắn gọn như sau: <></>
+            // <>
+            // <h1>Heading 1</h1>
+            //     <h2>Heading 2</h2>
+            // </>
 
             // Thay vì phải dùng 1 thẻ html khác
             /*
