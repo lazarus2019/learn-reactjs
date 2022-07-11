@@ -1,12 +1,16 @@
+import React from 'react';
 import './App.css';
 
 // Import components
 import LearnUseState from './components/LearnUseState.js'
+import TwoWaysBinding from './components/TwoWaysBinding.js';
 
-const orders = [100, 50, 20]
 function App() {
   return (
-    <LearnUseState />
+    <React.Fragment>
+      <LearnUseState />
+      <TwoWaysBinding />
+    </React.Fragment>
   );
 }
 
