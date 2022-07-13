@@ -4,6 +4,22 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Fake comments [LearnUseEffect_p4.js]
+function emitComment(id){ // emit: phát đi
+  setInterval(()=>{
+   window.dispatchEvent( // Phát ra sự kiện global (tất cả component đều có thể lắng nghe sự kiện này)
+     new CustomEvent(`lesson-${id}`, {
+       detail: `Nội dung comment của lesson ${id}`
+     })
+   ) 
+  }, 2000)
+}
+
+// Uncomment when run file LearnUseEffect_p4.js
+// emitComment(1)
+// emitComment(2)
+// emitComment(3)
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
