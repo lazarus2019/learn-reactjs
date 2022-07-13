@@ -9,6 +9,7 @@ import LearnUseEffectP1 from './components/LearnUseEffect_p1';
 import LearnUseEffectP2 from './components/LearnUseEffect_p2';
 import LearnUseEffectP3 from './components/LearnUseEffect_p3';
 import LearnUseEffectP4 from './components/LearnUseEffect_p4';
+import LearnUseLayoutEffect from './components/LearnUseLayoutEffect';
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
       {/* <LearnUseEffectP1 /> */}
       {/* <LearnUseEffectP2 /> */}
       {/* <LearnUseEffectP3 /> */}
-      <LearnUseEffectP4 />
+      {/* <LearnUseEffectP4 /> */}
+      <LearnUseLayoutEffect />
 
     </React.Fragment>
   );
