@@ -11,6 +11,7 @@ import LearnUseEffectP3 from './components/LearnUseEffect_p3';
 import LearnUseEffectP4 from './components/LearnUseEffect_p4';
 import LearnUseLayoutEffect from './components/LearnUseLayoutEffect';
 import LearnUseRef from './components/LearnUseRef';
+import ReactMemoHOC from './components/React_memo_HOC'
 
 function App() {
   return (
@@ -23,7 +24,8 @@ function App() {
       {/* <LearnUseEffectP3 /> */}
       {/* <LearnUseEffectP4 /> */}
       {/* <LearnUseLayoutEffect /> */}
-      <LearnUseRef />
+      {/* <LearnUseRef /> */}
+      <ReactMemoHOC />
 
     </React.Fragment>
   );
