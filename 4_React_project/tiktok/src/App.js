@@ -13,6 +13,7 @@ import LearnUseLayoutEffect from './components/LearnUseLayoutEffect';
 import LearnUseRef from './components/LearnUseRef';
 import ReactMemoHOC from './components/React_memo_HOC/React_memo_HOC'
 import LearnUseCallback from './components/LearnUseCallback/LearnUseCallback'
+import LearnUseMemo from './components/LearnUseMemo'
 
 function App() {
   return (
@@ -27,7 +28,8 @@ function App() {
       {/* <LearnUseLayoutEffect /> */}
       {/* <LearnUseRef /> */}
       {/* <ReactMemoHOC /> */}
-      <LearnUseCallback />
+      {/* <LearnUseCallback /> */}
+      <LearnUseMemo />
 
     </React.Fragment>
   );
