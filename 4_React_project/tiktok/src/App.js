@@ -56,13 +56,13 @@ function App() {
       {/* <TodoAppWithUseReducer /> */}
 
       {/* Bao các component cần sử dụng prop theme */}
-      <ThemeProvider>
+      {/* <ThemeProvider>
         <LearnUseContext />
-      </ThemeProvider>
+      </ThemeProvider> */}
 
-      {/* <StoreProvider>
+      <StoreProvider>
         <UseContextNUseReducer />
-      </StoreProvider> */}
+      </StoreProvider>
 
     </React.Fragment>
   );
