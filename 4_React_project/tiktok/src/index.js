@@ -5,13 +5,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 // Fake comments [LearnUseEffect_p4.js]
-function emitComment(id){ // emit: phát đi
-  setInterval(()=>{
-   window.dispatchEvent( // Phát ra sự kiện global (tất cả component đều có thể lắng nghe sự kiện này)
-     new CustomEvent(`lesson-${id}`, {
-       detail: `Nội dung comment của lesson ${id}`
-     })
-   ) 
+function emitComment(id) { // emit: phát đi
+  setInterval(() => {
+    window.dispatchEvent( // Phát ra sự kiện global (tất cả component đều có thể lắng nghe sự kiện này)
+      new CustomEvent(`lesson-${id}`, {
+        detail: `Nội dung comment của lesson ${id}`
+      })
+    )
   }, 2000)
 }
 
@@ -22,9 +22,9 @@ function emitComment(id){ // emit: phát đi
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  // <React.StrictMode>
+      <App />
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
