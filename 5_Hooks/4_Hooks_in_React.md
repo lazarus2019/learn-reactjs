@@ -1,3 +1,7 @@
+Khái niệm căn bản về React Hook (đầy đủ) [Here](https://gist.github.com/danhdv-0883/b45ab32ddb63cd2f3775d7cc2f6cb03c)
+
+Các custom hook hay dùng: [https://usehooks.com/](https://usehooks.com/) | [https://www.hooks.guide/](https://www.hooks.guide/)
+
 ## Hook trong React - Gắn (gắn vào component)
 <hr>
 Hook được thêm vào React từ phiên bản 16.8.0
