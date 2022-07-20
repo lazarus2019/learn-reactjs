@@ -8,6 +8,8 @@ Open File LearnUseRef [Here](../4_React_project/tiktok/src/components/LearnUseRe
 
 => useRef sinh ra để giải quyết các vấn đề trên
 
+**Lưu ý: useRef không sử dụng cho function component mà chỉ các phần tử bên trong nó**
+
 ## Chức năng
 \- Lưu các giá trị qua một tham chiếu bên ngoài `function component` 
 >Giữ lại giá trị lưu trước đó khi render lại function component
