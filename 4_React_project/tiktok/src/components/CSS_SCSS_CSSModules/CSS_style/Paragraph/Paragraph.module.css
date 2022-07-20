@@ -1,0 +1,15 @@
+.paragraph{
+    color: red;
+}
+
+.heading{
+    font-size: 16px;
+}
+
+.mainBackground{
+    background-color: cyan;    
+}
+
+.disabled{
+    opacity: .6;
+}

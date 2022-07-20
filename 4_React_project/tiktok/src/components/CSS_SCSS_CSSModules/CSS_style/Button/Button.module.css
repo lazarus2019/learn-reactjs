@@ -1,0 +1,14 @@
+.disabled{
+    opacity: .5;
+    pointer-events: none;
+}
+
+.primary{
+    background-color: cyan;
+    color: #fff;
+}
+
+.danger{
+    background-color: red;
+    color: #fff;
+}

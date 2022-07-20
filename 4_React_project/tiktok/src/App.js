@@ -19,6 +19,7 @@ import TodoAppWithUseReducer from './components/LearnUseReducer/TodoApp/'
 import LearnUseContext from './components/LearnUseContext/LearnUseContext'
 import UseContextNUseReducer from './components/UseContextNUseReducer/UseContextNUseReducer'
 import LearnUseImperativeHandle from './components/LearnUseImperativeHandle/LearnUseImperativeHandle'
+import CSS_SCSS_CSSModule from './components/CSS_SCSS_CSSModules'
 
 // Provider
 import { ThemeProvider } from './components/LearnUseContext/ThemeContext'
@@ -65,7 +66,10 @@ function App() {
         <UseContextNUseReducer />
       </StoreProvider> */}
 
-      <LearnUseImperativeHandle />
+      {/* <LearnUseImperativeHandle /> */}
+
+      {/* ----CSS/SCSS/CSS Modules----- */}
+      <CSS_SCSS_CSSModule />
 
     </React.Fragment>
   );
