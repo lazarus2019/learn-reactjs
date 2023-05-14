@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form in React</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <!-- 
+        Làm việc với Form
+
+        - Lấy giá trị từ input trong form
+            - Thông qua index: event.target.elements[0].value
+            - Thông qua name hoặc id: event.target.elements.name.value
+        - Sử dụng refs
+            => Refs là object giữ 1 giá trị không đổi qua các lần re-render của component
+            => sử dụng current property để lấy giá trị của ref
+        - Validate lower-case cho input
+        - Điều khiển giá trị của input
+     -->
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function UsernameForm({ onSubmitUsername }) {
+            // Khai báo biến ref để nhận giá trị từ input
+            const emailRef = React.useRef()
+            const inputRef = React.useRef()
+
+            function handleSubmit(e) {
+                e.preventDefault()
+                // Lấy giá trị qua index, name, id
+                console.log(e.target.elements) // Danh sách inputs trong form
+                console.log(e.target.elements[2].value) // Giá trị của input email
+                onSubmitUsername(e.target.elements.usernameInput.value)
+
+                // Lấy giá trị qua ref của React
+                console.log(emailInputRef.current) // <input id="emailInput" type="email">
+            }
+
+            return (
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label htmlFor="usernameInput">Username:</label>
+                        <input id="usernameInput" type="text" 
+
+                        // Gán ref cho từng input để nhận giá trị sau khi submit
+                        ref={inputRef} />
+                    </div>
+                    <div>
+                        <label htmlFor="emailInput">Email:</label>
+                        <input id="emailInput" type="email" 
+
+                        // Gán ref cho từng input để nhận giá trị sau khi submit
+                        ref={emailRef} />
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+            )
+        }
+
+        function App() {
+            const onSubmitUsername = username => alert(`You entered: ${username}`)
+            return <UsernameForm onSubmitUsername={onSubmitUsername} />
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'))
+    </script>
+</body>
+
+</html>

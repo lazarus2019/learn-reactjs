@@ -20,11 +20,14 @@ import LearnUseContext from './components/LearnUseContext/LearnUseContext'
 import UseContextNUseReducer from './components/UseContextNUseReducer/UseContextNUseReducer'
 import LearnUseImperativeHandle from './components/LearnUseImperativeHandle/LearnUseImperativeHandle'
 import CSS_SCSS_CSSModule from './components/CSS_SCSS_CSSModules'
+import LearnRouter from './components/LearnRouter'
 
 // Provider
 import { ThemeProvider } from './components/LearnUseContext/ThemeContext'
 import { StoreProvider } from './components/UseContextNUseReducer/store'
 
+// Router
+import { BrowserRouter as Router } from 'react-router-dom'
 
 function App() {
   return (
@@ -69,7 +72,11 @@ function App() {
       {/* <LearnUseImperativeHandle /> */}
 
       {/* ----CSS/SCSS/CSS Modules----- */}
-      <CSS_SCSS_CSSModule />
+      {/* <CSS_SCSS_CSSModule /> */}
+
+      <Router>
+        <LearnRouter />
+      </Router>
 
     </React.Fragment>
   );
